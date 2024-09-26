@@ -1,0 +1,90 @@
+.search-bar {
+  text-align: center;
+}
+
+input {
+  font-size: 1.2em;
+}
+
+.search-button {
+  font-size: 1.2em;
+}
+
+/*Weather Display*/
+.weather-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  position: relative;
+  text-align: center;
+  border-radius: 10px;
+  overflow-x: hidden;
+}
+
+.weather-display video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.current-main {
+  display: flex;
+  margin-left: 1em;
+  height: 75%;
+  width: -webkit-fill-available;
+}
+
+.current-icon {
+  width: 15%;
+  height: 20%;
+  margin: 0.2em 0 0 1.5em;
+}
+
+.time {
+  font-size: 1em;
+}
+
+.current-details {
+  margin: 2em 1em 0 0;
+}
+
+/*Forecast Display*/
+.forecast-details {
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  justify-content: space-evenly;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+.forecast-icon {
+  width: 25%;
+  height: 15%;
+}
+
+@media only screen and (max-width: 580px) {
+  .forecast-details {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .forecast-item {
+    border: 1px solid black;
+    flex: 0 0 auto;
+    width: 33%;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+  }
+}
+[class*=night] {
+  color: #fff;
+}/*# sourceMappingURL=App.css.map */
