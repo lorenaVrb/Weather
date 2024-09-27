@@ -5,12 +5,9 @@
 /*Search Bar*/
 .search-bar{
     text-align: center;
-    padding: 1.5em 0;
+    padding: 1em;
 }
-input{
-    font-size: 1.2em;
-}
-.search-button{
+input, .search-button{
     font-size: 1.2em;
 }
 
@@ -19,7 +16,7 @@ input{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100vh;
+    height: 90vh;
     position: relative; 
     text-align: center;
     border-radius: 10px;
@@ -76,11 +73,16 @@ input{
         scroll-snap-type: x mandatory; 
     }
     .forecast-item {
-        border: 1px solid black;
         flex: 0 0 auto; 
         width: 33%; 
         scroll-snap-align: start; 
         box-sizing: border-box; 
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .search-button{
+        display: none;
     }
 }
 

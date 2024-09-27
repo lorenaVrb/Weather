@@ -118,10 +118,10 @@ export default function ForecastDisplay({ forecastData }) {
             <p>
               <FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "red" }} />{" "}
               {forecast.highestTemp}°C
-            </p> 
-            <p><FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "blue" }} />{" "}
-            {forecast.lowestTemp}°C</p>
-            <p>
+              <br></br>
+            <FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "blue" }} />{" "}
+            {forecast.lowestTemp}°C
+            <br></br>
               <FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "green" }} />{" "}
               Real Feel: {forecast.avgFeelsLikeTemp}°C
             </p>
