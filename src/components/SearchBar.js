@@ -17,7 +17,7 @@ const SearchComponent = ({ onSearch }) => {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Enter city name"
       />
-      <button type="submit">Search</button>
+      <button className='search-button' type="submit">Search</button>
     </form>
   );
 };

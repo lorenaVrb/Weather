@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTemperatureQuarter } from "@fortawesome/free-solid-svg-icons"; // Import the temperature icon
 
 export default function ForecastDisplay({ forecastData }) {
   // Helper function to format date as '24 Aug'
@@ -9,7 +11,12 @@ export default function ForecastDisplay({ forecastData }) {
     });
   };
 
-  // Function to group forecast data by day and calculate averages
+  // Helper function to get the day name
+  const getDayName = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", { weekday: "long" });
+  };
+
+  // Function to group forecast data by day and calculate highest and lowest temps
   const getDailyForecasts = (list) => {
     const dailyForecasts = {};
 
@@ -27,9 +34,9 @@ export default function ForecastDisplay({ forecastData }) {
         };
       }
 
-      // Collect data to calculate averages
+      // Collect data for highest and lowest temps
       dailyForecasts[date].temps.push(forecast.main.temp);
-      dailyForecasts[date].feelsLikeTemps.push(forecast.main.feels_like); // Collect 'feels like' temperatures
+      dailyForecasts[date].feelsLikeTemps.push(forecast.main.feels_like);
       dailyForecasts[date].humidities.push(forecast.main.humidity);
       dailyForecasts[date].windSpeeds.push(forecast.wind.speed);
       dailyForecasts[date].weatherDescriptions.push(
@@ -38,12 +45,11 @@ export default function ForecastDisplay({ forecastData }) {
       dailyForecasts[date].weatherIcons.push(forecast.weather[0].icon);
     });
 
-    // Convert grouped data into an array of average values
-    const averagedForecasts = Object.entries(dailyForecasts).map(
+    // Convert grouped data into an array of highest and lowest values
+    const dailyForecastData = Object.entries(dailyForecasts).map(
       ([date, data]) => {
-        const avgTemp = (
-          data.temps.reduce((sum, temp) => sum + temp, 0) / data.temps.length
-        ).toFixed(1);
+        const highestTemp = Math.max(...data.temps).toFixed(1);
+        const lowestTemp = Math.min(...data.temps).toFixed(1);
         const avgFeelsLikeTemp = (
           data.feelsLikeTemps.reduce((sum, temp) => sum + temp, 0) /
           data.feelsLikeTemps.length
@@ -79,8 +85,9 @@ export default function ForecastDisplay({ forecastData }) {
 
         return {
           date: new Date(Number(date)),
-          avgTemp,
-          avgFeelsLikeTemp, // Include 'feels like' temperature
+          highestTemp,
+          lowestTemp,
+          avgFeelsLikeTemp,
           avgHumidity,
           avgWindSpeed,
           description: commonDescription,
@@ -90,7 +97,7 @@ export default function ForecastDisplay({ forecastData }) {
     );
 
     // Sort the forecasts by date (just to be safe)
-    return averagedForecasts.sort((a, b) => a.date - b.date);
+    return dailyForecastData.sort((a, b) => a.date - b.date);
   };
 
   // Get daily forecasts
@@ -98,21 +105,26 @@ export default function ForecastDisplay({ forecastData }) {
 
   return (
     <div className="forecast-display">
-      <h2>Forecast</h2>
       <div className="forecast-details">
         {dailyForecasts.map((forecast, index) => (
           <div className="forecast-item" key={index}>
-            <p>{formatDate(forecast.date)}</p>
-            <p>{forecast.avgTemp}°C</p>
+             <p>{getDayName(forecast.date)} <br></br>{formatDate(forecast.date)}</p>
             <img
               className="forecast-icon"
               src={`${process.env.PUBLIC_URL}/custom-icons/${forecast.icon}.png`}
               alt="weather icon"
             />
-
-            <p>🌡️ {forecast.avgFeelsLikeTemp}°C</p>
             <p>💧 {forecast.avgHumidity}%</p>
-            <p>🌫️ {forecast.avgWindSpeed} m/s</p>
+            <p>
+              <FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "red" }} />{" "}
+              {forecast.highestTemp}°C
+            </p> 
+            <p><FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "blue" }} />{" "}
+            {forecast.lowestTemp}°C</p>
+            <p>
+              <FontAwesomeIcon icon={faTemperatureQuarter} style={{ color: "green" }} />{" "}
+              Real Feel: {forecast.avgFeelsLikeTemp}°C
+            </p>
           </div>
         ))}
       </div>

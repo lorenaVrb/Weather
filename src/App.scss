@@ -1,5 +1,11 @@
+.forecast-display, .search-bar{
+    background-color: #F1F1F1;
+}
+
+/*Search Bar*/
 .search-bar{
     text-align: center;
+    padding: 1.5em 0;
 }
 input{
     font-size: 1.2em;
@@ -58,8 +64,6 @@ input{
     scroll-snap-type: x mandatory;
 }
 
-
-
 .forecast-icon {
     width: 25%;
     height: 15%;
@@ -84,4 +88,3 @@ input{
 [class*='night'] {
     color: #fff; 
   }
-

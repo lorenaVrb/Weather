@@ -1,5 +1,11 @@
+.forecast-display, .search-bar {
+  background-color: #F1F1F1;
+}
+
+/*Search Bar*/
 .search-bar {
   text-align: center;
+  padding: 1.5em 0;
 }
 
 input {
