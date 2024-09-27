@@ -79,7 +79,7 @@ function WeatherApp() {
   
 
   return (
-    <div className="weather-app">
+    <div className="weather-app" translate='no'>
       <SearchBar onSearch={handleSearch} />
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
